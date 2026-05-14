@@ -1,8 +1,28 @@
+const CACHE_NAME = 'nova-core-v1';
+const assets = [
+  './',
+  './index.html',
+  './manifest.json'
+];
+
+// Install Service Worker
 self.addEventListener('install', (e) => {
-  console.log('FRIDYI PWA: Service Worker Installed');
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('FRIDYI: Caching Shell Files');
+      return cache.addAll(assets);
+    })
+  );
 });
 
+// Activate & Clean old cache
+self.addEventListener('activate', (e) => {
+  console.log('FRIDYI: Service Worker Activated');
+});
+
+// Fetch events
 self.addEventListener('fetch', (e) => {
-  // Website files-ai cache panna ithu help pannum
-  e.respondWith(fetch(e.request));
+  e.respondWith(
+    fetch(e.request).catch(() => caches.match(e.request))
+  );
 });
