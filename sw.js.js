@@ -1,8 +1,8 @@
 const CACHE_NAME = 'nova-core-v1';
 const assets = [
-  './',
-  './index.html',
-  './manifest.json'
+  '/Turt-Industry/',
+  '/Turt-Industry/index.html',
+  '/Turt-Industry/manifest.json'
 ];
 
 // Install Service Worker
